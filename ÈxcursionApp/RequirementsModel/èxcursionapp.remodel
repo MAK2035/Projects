@@ -1,0 +1,242 @@
+UseCaseModel ExcursionApp {
+
+	UC::excursionSearch definedBySSD(ExcursionSearchSSD) relatedService(ExcursionSearchService)
+	UC::comparePrices definedBySSD(ComparePricesSSD) relatedService(ComparePricesService)
+	UC::userBooking definedBySSD(UserBookingSSD) relatedService(UserBookingService)
+	UC::userPayment definedBySSD(UserPaymentSSD) relatedService(UserPaymentService)
+	UC::promoteOffer definedBySSD(PromoteOfferSSD) relatedService(PromoteOfferService)
+	UC::agentBooking definedBySSD(AgentBookingSSD) relatedService(AgentBookingService)
+	UC::monitor
+
+	Actor User {
+		excursionSearch
+		comparePrices
+		userBooking
+		userPayment
+	}
+
+	Actor Agent {
+	agentBooking
+	}
+
+	Actor AffiliatePartner {
+		promoteOffer
+	}
+
+	Actor BussinessManager {
+	}
+
+	Actor CustomerSupport {
+	}
+
+	Interaction ExcursionSearchSSD {
+
+		[Participants: User ExcursionSearchService]
+
+		CallMessage::ExcursionSearchSSDCallMessage1(input ExcursionSearchSSDCallMessage1SendingEnd -> ExcursionSearchSSDExecution1StartEnd)
+		ReturnMessage::ExcursionSearchSSDCallMessage1Return(ExcursionSearchSSDExecution1FinishEnd -> ExcursionSearchSSDCallMessage1ReturnReceivingEnd ExcursionSearchSSDCallMessage1)
+
+		Execution::ExcursionSearchSSDExecution1(ExcursionSearchService ExcursionSearchSSDExecution1StartEnd ExcursionSearchSSDExecution1FinishEnd)
+
+		MessageEnd::ExcursionSearchSSDCallMessage1SendingEnd(User ExcursionSearchSSDCallMessage1)
+		ExecutionEnd::ExcursionSearchSSDExecution1StartEnd(ExcursionSearchService ExcursionSearchSSDExecution1)
+		ExecutionEnd::ExcursionSearchSSDExecution1FinishEnd(ExcursionSearchService ExcursionSearchSSDExecution1)
+		MessageEnd::ExcursionSearchSSDCallMessage1ReturnReceivingEnd(User ExcursionSearchSSDCallMessage1Return)
+
+	}
+
+	Interaction ComparePricesSSD {
+
+		[Participants: User ComparePricesService]
+
+		CallMessage::ComparePricesSSDCallMessage1(findBestPrice ComparePricesSSDCallMessage1SendingEnd -> ComparePricesSSDExecution1StartEnd)
+		ReturnMessage::ComparePricesSSDCallMessage1Return(ComparePricesSSDExecution1FinishEnd -> ComparePricesSSDCallMessage1ReturnReceivingEnd ComparePricesSSDCallMessage1)
+
+		Execution::ComparePricesSSDExecution1(ComparePricesService ComparePricesSSDExecution1StartEnd ComparePricesSSDExecution1FinishEnd)
+
+		MessageEnd::ComparePricesSSDCallMessage1SendingEnd(User ComparePricesSSDCallMessage1)
+		ExecutionEnd::ComparePricesSSDExecution1StartEnd(ComparePricesService ComparePricesSSDExecution1)
+		ExecutionEnd::ComparePricesSSDExecution1FinishEnd(ComparePricesService ComparePricesSSDExecution1)
+		MessageEnd::ComparePricesSSDCallMessage1ReturnReceivingEnd(User ComparePricesSSDCallMessage1Return)
+
+	}
+
+	Interaction UserBookingSSD {
+
+		[Participants: User UserBookingService]
+
+		CallMessage::UserBookingSSDCallMessage1(userBook UserBookingSSDCallMessage1SendingEnd -> UserBookingSSDExecution1StartEnd)
+		ReturnMessage::UserBookingSSDCallMessage1Return(UserBookingSSDExecution1FinishEnd -> UserBookingSSDCallMessage1ReturnReceivingEnd UserBookingSSDCallMessage1)
+
+		Execution::UserBookingSSDExecution1(UserBookingService UserBookingSSDExecution1StartEnd UserBookingSSDExecution1FinishEnd)
+
+		MessageEnd::UserBookingSSDCallMessage1SendingEnd(User UserBookingSSDCallMessage1)
+		ExecutionEnd::UserBookingSSDExecution1StartEnd(UserBookingService UserBookingSSDExecution1)
+		ExecutionEnd::UserBookingSSDExecution1FinishEnd(UserBookingService UserBookingSSDExecution1)
+		MessageEnd::UserBookingSSDCallMessage1ReturnReceivingEnd(User UserBookingSSDCallMessage1Return)
+
+	}
+
+	Interaction UserPaymentSSD {
+
+		[Participants: User UserPaymentService]
+
+		CallMessage::UserPaymentSSDCallMessage1(payment UserPaymentSSDCallMessage1SendingEnd -> UserPaymentSSDExecution1StartEnd)
+		ReturnMessage::UserPaymentSSDCallMessage1Return(UserPaymentSSDExecution1FinishEnd -> UserPaymentSSDCallMessage1ReturnReceivingEnd UserPaymentSSDCallMessage1)
+
+		Execution::UserPaymentSSDExecution1(UserPaymentService UserPaymentSSDExecution1StartEnd UserPaymentSSDExecution1FinishEnd)
+
+		MessageEnd::UserPaymentSSDCallMessage1SendingEnd(User UserPaymentSSDCallMessage1)
+		ExecutionEnd::UserPaymentSSDExecution1StartEnd(UserPaymentService UserPaymentSSDExecution1)
+		ExecutionEnd::UserPaymentSSDExecution1FinishEnd(UserPaymentService UserPaymentSSDExecution1)
+		MessageEnd::UserPaymentSSDCallMessage1ReturnReceivingEnd(User UserPaymentSSDCallMessage1Return)
+
+	}
+
+	Interaction PromoteOfferSSD {
+
+		[Participants: AffiliatePartner PromoteOfferService]
+
+		CallMessage::PromoteOfferSSDCallMessage1(promoteOffer PromoteOfferSSDCallMessage1SendingEnd -> PromoteOfferSSDExecution1StartEnd)
+		ReturnMessage::PromoteOfferSSDCallMessage1Return(PromoteOfferSSDExecution1FinishEnd -> PromoteOfferSSDCallMessage1ReturnReceivingEnd PromoteOfferSSDCallMessage1)
+
+		Execution::PromoteOfferSSDExecution1(PromoteOfferService PromoteOfferSSDExecution1StartEnd PromoteOfferSSDExecution1FinishEnd)
+
+		MessageEnd::PromoteOfferSSDCallMessage1SendingEnd(AffiliatePartner PromoteOfferSSDCallMessage1)
+		ExecutionEnd::PromoteOfferSSDExecution1StartEnd(PromoteOfferService PromoteOfferSSDExecution1)
+		ExecutionEnd::PromoteOfferSSDExecution1FinishEnd(PromoteOfferService PromoteOfferSSDExecution1)
+		MessageEnd::PromoteOfferSSDCallMessage1ReturnReceivingEnd(AffiliatePartner PromoteOfferSSDCallMessage1Return)
+
+	}
+
+	Interaction AgentBookingSSD {
+
+		[Participants: Agent AgentBookingService]
+
+		CallMessage::AgentBookingSSDCallMessage1(book AgentBookingSSDCallMessage1SendingEnd -> AgentBookingSSDExecution1StartEnd)
+		ReturnMessage::AgentBookingSSDCallMessage1Return(AgentBookingSSDExecution1FinishEnd -> AgentBookingSSDCallMessage1ReturnReceivingEnd AgentBookingSSDCallMessage1)
+
+		Execution::AgentBookingSSDExecution1(AgentBookingService AgentBookingSSDExecution1StartEnd AgentBookingSSDExecution1FinishEnd)
+
+		MessageEnd::AgentBookingSSDCallMessage1SendingEnd(Agent AgentBookingSSDCallMessage1)
+		ExecutionEnd::AgentBookingSSDExecution1StartEnd(AgentBookingService AgentBookingSSDExecution1)
+		ExecutionEnd::AgentBookingSSDExecution1FinishEnd(AgentBookingService AgentBookingSSDExecution1)
+		MessageEnd::AgentBookingSSDCallMessage1ReturnReceivingEnd(Agent AgentBookingSSDCallMessage1Return)
+
+	}
+
+	Service EXcursionAppSystem {
+
+	}
+
+	Service ThirdPartyServices {
+
+	}
+
+	Service ExcursionSearchService {
+
+		[Operation]
+		input(destination, dates, people)
+		search(destination, date, people)
+
+	}
+
+	Service ExcursionAppSystem {
+
+	}
+
+	Service ComparePricesService {
+
+		[Operation]
+		findBestPrice(chooseExcursion)
+
+	}
+
+	Service UserBookingService {
+
+		[Operation]
+		userBook(numberOfPeople, name, dateOfBirth, nationality, idNum)
+
+	}
+
+	Service UserPaymentService {
+
+		[Operation]
+		payment(cardType, cardNumber, expirationDate, cvv, nameOnCard, billingAddress)
+
+	}
+
+	Service PromoteOfferService {
+
+		[Operation]
+		promoteOffer(performanceReports, affiliateID, commissionRate, noBookings, destination, travelDates, customerInfo)
+
+	}
+
+Service AgentBookingService {
+
+		[Operation]
+		book(customerInfo, bookingNumber, availability, pricing, recommendations)
+
+	}
+
+}
+
+DomainModel ExcursionApp {
+
+Entity User {
+	}
+
+	Entity Agent {
+		AgentID : Integer
+		AgentPassword : String
+	}
+
+	Entity ComparePrices {
+		ChooseExcursion : Boolean
+		Excursion1 : String
+		Excursion2 : String
+		Excursion3 : String
+	}
+
+	Entity UserPayment {
+		CardType : Boolean
+		CardNumber : Integer
+		ExpirationDate : Date
+		CVV : Integer
+		NameOnCard : String
+		BillingAddress : String
+	}
+
+	Entity ExcursionSearch {
+		Destination : String
+		Dates : Date
+		People : Integer
+	}
+
+	Entity UserBooking {
+		NumberOfPeople : Integer
+		Name : String
+		DateOfBirth : Date
+		Nationality : String
+		IDNumber : Integer
+	}
+
+	Entity AffiliatePartner {
+		AffiliateID : Integer
+		AffiliatePassword : String
+	}
+
+	Entity Entity8 {
+	}
+
+	Entity AgentBooking {
+		CustomerInfo : String
+		BookingNumber : Integer
+		Availability : Boolean
+		Excrusions : Boolean
+		Pricing : Integer
+	}
+
+}
+
